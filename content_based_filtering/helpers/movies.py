@@ -11,8 +11,12 @@ def get_movie_id(movies, title, year=None):
     else:
         return res.index[0]
 
-def get_movie_name(movies, index):
-    return movies.iloc[index].title
+def get_movie_name(movies, movie_id):
+    return movies.loc[movies['movie_id']==movie_id].title 
+    # I chose to change the way the movie's name is retrieved
+    # Because the proposed way rests on the belief that the DataFrame's index progresses just like the movie_id column.
+    # This did not take into account the possibility of removed movies(with reseted indexes) along the way, and could have resulted in mismatches.
 
-def get_movie_year(movies, index):
-    return movies.iloc[index].year
+def get_movie_year(movies, movie_id):
+    return movies.loc[movies['movie_id']==movie_id].year
+    # Same than in get_movie_name
